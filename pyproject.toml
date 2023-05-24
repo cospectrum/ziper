@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ziper"
+version = "0.1.0"
+repository = "https://github.com/cospectrum/ziper"
+description = "Rust-like iterator for Python"
+license = "Apache-2.0"
+authors = ["cospectrum <severinalexeyv@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.3.0"
+ruff = "^0.0.269"
+pytest = "^7.3.1"
+pyright = "^1.1.309"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
