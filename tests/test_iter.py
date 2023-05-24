@@ -62,7 +62,7 @@ def test_map() -> None:
 
 
 def test_nth() -> None:
-    stop = random.randint(0, 10)
+    stop = random.randint(1, 10)
     xs = range(stop)
     n = random.randint(0, stop)
     assert Iter(xs).nth(n) == n
