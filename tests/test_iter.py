@@ -46,7 +46,7 @@ def test_loop() -> None:
     assert it.next() is None
 
 
-def test_map() -> None:
+def test_types() -> None:
     iterable: List[int] = [1, 2, 3]
     it: Iterator[int] = iter(iterable)
     int_iter: Iter[int] = Iter(it)
@@ -64,5 +64,85 @@ def test_map() -> None:
 def test_nth() -> None:
     stop = random.randint(1, 10)
     xs = range(stop)
-    n = random.randint(0, stop)
+    n = random.randint(0, stop - 1)
     assert Iter(xs).nth(n) == n
+
+
+def test_step_by() -> None:
+    a = [0, 1, 2, 3, 4, 5]
+    iter = Iter(a).step_by(2)
+
+    assert iter.next() == 0
+    assert iter.next() == 2
+    assert iter.next() == 4
+    assert iter.next() is None
+
+
+def test_take() -> None:
+    a = [1, 2, 3]
+
+    iter = Iter(a).take(2)
+
+    assert iter.next() == 1
+    assert iter.next() == 2
+    assert iter.next() is None
+
+
+def test_skip() -> None:
+    a = [1, 2, 3]
+
+    iter = Iter(a).skip(2)
+
+    assert iter.next() == 3
+    assert iter.next() is None
+
+
+def test_reduce() -> None:
+    reduced = Iter(range(1, 10)).reduce(lambda acc, e: acc + e)
+    assert reduced == 45
+
+    folded = Iter(range(1, 10)).fold(0, lambda acc, e: acc + e)
+    assert reduced == folded
+
+
+def test_fold() -> None:
+    numbers = [1, 2, 3, 4, 5]
+
+    result = Iter(numbers).fold('0', lambda acc, x: (
+        f'({acc} + {x})'
+    ))
+
+    assert result == '(((((0 + 1) + 2) + 3) + 4) + 5)'
+
+
+def test_all() -> None:
+    a = [1, 2, 3]
+
+    assert Iter(a).all(lambda x: x > 0)
+    assert not Iter(a).all(lambda x: x > 2)
+
+
+def test_any() -> None:
+    a = [1, 2, 3]
+
+    assert Iter(a).any(lambda x: x > 0)
+    assert not Iter(a).any(lambda x: x > 5)
+
+
+def test_skip_while() -> None:
+    a = [-1, 0, 1]
+
+    iter = Iter(a).skip_while(lambda x: x < 0)
+
+    assert iter.next() == 0
+    assert iter.next() == 1
+    assert iter.next() is None
+
+
+def test_take_while() -> None:
+    a = [-1, 0, 1]
+
+    iter = Iter(a).take_while(lambda x: x < 0)
+
+    assert iter.next() == -1
+    assert iter.next() is None

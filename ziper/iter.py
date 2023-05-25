@@ -116,3 +116,12 @@ class Iter(Generic[T]):
     def for_each(self, f: Fn[T, None]) -> None:
         for x in self:
             f(x)
+
+    def step_by(self, step: int) -> Iter[T]:
+        return Iter(itertools.islice(self, 0, None, step))
+
+    def take_while(self, predicate: Fn[T, bool]) -> Iter[T]:
+        return Iter(itertools.takewhile(predicate, self))
+
+    def skip_while(self, predicate: Fn[T, bool]) -> Iter[T]:
+        return Iter(itertools.dropwhile(predicate, self))
