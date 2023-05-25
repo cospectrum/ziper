@@ -125,3 +125,11 @@ class Iter(Generic[T]):
 
     def skip_while(self, predicate: Fn[T, bool]) -> Iter[T]:
         return Iter(itertools.dropwhile(predicate, self))
+
+    def inspect(self, f: Fn[T, None]) -> Iter[T]:
+
+        def inspector(x: T) -> T:
+            f(x)
+            return x
+
+        return self.map(inspector)
