@@ -1,5 +1,6 @@
 from __future__ import annotations
 import itertools
+import more_itertools as mitertools
 
 from typing import (
     Iterable,
@@ -137,3 +138,7 @@ class Iter(Generic[T]):
             return x
 
         return self.map(inspector)
+
+    def chunks(self, size: int) -> Iter[Iter[T]]:
+        it = mitertools.ichunked(self, size)
+        return Iter(it).map(lambda chunk: Iter(chunk))

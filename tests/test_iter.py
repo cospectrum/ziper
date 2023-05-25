@@ -17,7 +17,7 @@ def test_readme() -> None:
     xs = ['1', '2', 'a', '3', '4', 'b', 'c']
     ys = [6, 7, 8, 9]
 
-    result: list = (
+    evens: list = (
         Iter(xs)
         .filter(lambda x: x.isdecimal())
         .map(int)
@@ -25,7 +25,7 @@ def test_readme() -> None:
         .filter(lambda x: x % 2 == 0)
         .collect(list)
     )
-    assert result == [2, 4, 6, 8]
+    assert evens == [2, 4, 6, 8]
 
 
 def test_loop() -> None:
@@ -53,6 +53,9 @@ def test_types() -> None:
     iterable: List[int] = [1, 2, 3]
     it: Iterator[int] = iter(iterable)
     int_iter: Iter[int] = Iter(it)
+
+    assert isinstance(int_iter, Iterator)
+    assert isinstance(int_iter, Iterable)
 
     f: Callable[[int], str] = str
     str_iter: Iter[str] = int_iter.map(f)
@@ -156,3 +159,17 @@ def test_take_while() -> None:
 
     assert it.next() == -1
     assert it.next() is None
+
+
+def test_chunks() -> None:
+    data = [1, 1, 2, -2, 6, 0, 3, 1]
+
+    for chunk in Iter(data).chunks(3):
+        assert isinstance(chunk, Iter)
+        assert sum(chunk) == 4
+
+    chunks = Iter(data).chunks(3)
+    assert chunks.next().collect(list) == [1, 1, 2]  # type: ignore
+    assert chunks.next().collect(list) == [-2, 6, 0]  # type: ignore
+    assert chunks.next().collect(list) == [3, 1]  # type: ignore
+    assert chunks.next() is None

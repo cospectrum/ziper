@@ -166,6 +166,7 @@ cython_debug/
 !ziper
 !tests
 !README.md
+!LICENSE
 !.gitignore
 !.pre-commit-config.yaml
 !pyproject.toml
