@@ -12,15 +12,18 @@ from typing import (
 
 
 def test_readme() -> None:
+    from ziper import Iter
+
     xs = ['1', '2', 'a', '3', '4', 'b', 'c']
     ys = [6, 7, 8, 9]
 
-    result = list(
+    result: list = (
         Iter(xs)
         .filter(lambda x: x.isdecimal())
         .map(int)
         .chain(ys)
         .filter(lambda x: x % 2 == 0)
+        .collect(list)
     )
     assert result == [2, 4, 6, 8]
 

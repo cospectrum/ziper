@@ -14,27 +14,31 @@ from typing import (
 
 T = TypeVar('T')
 U = TypeVar('U')
+V = TypeVar('V')
 
 Fn = Callable[[T], U]
 
 
 class Iter(Generic[T]):
-    it: Iterator[T]
+    _it: Iterator[T]
 
     def __init__(self, iterable: Iterable[T]) -> None:
-        self.it = iter(iterable)
+        self._it = iter(iterable)
 
     def __iter__(self) -> Iterator[T]:
-        return self.it
+        return self._it
 
     def __next__(self) -> T:
-        return next(self.it)
+        return next(self._it)
 
     def next(self) -> Optional[T]:
         try:
             return next(self)
         except StopIteration:
             return None
+
+    def collect(self, f: Fn[Iterable[T], V]) -> V:
+        return f(self)
 
     def map(self, f: Fn[T, U]) -> Iter[U]:
         return Iter(map(f, self))
