@@ -62,6 +62,13 @@ def test_types() -> None:
 
 
 def test_nth() -> None:
+    a = [1, 2, 3]
+    it = Iter(a)
+    assert it.nth(1) == 2
+    assert it.nth(1) is None
+
+    assert Iter(a).nth(10) is None
+
     stop = random.randint(1, 10)
     xs = range(stop)
     n = random.randint(0, stop - 1)
@@ -70,31 +77,31 @@ def test_nth() -> None:
 
 def test_step_by() -> None:
     a = [0, 1, 2, 3, 4, 5]
-    iter = Iter(a).step_by(2)
+    it = Iter(a).step_by(2)
 
-    assert iter.next() == 0
-    assert iter.next() == 2
-    assert iter.next() == 4
-    assert iter.next() is None
+    assert it.next() == 0
+    assert it.next() == 2
+    assert it.next() == 4
+    assert it.next() is None
 
 
 def test_take() -> None:
     a = [1, 2, 3]
 
-    iter = Iter(a).take(2)
+    it = Iter(a).take(2)
 
-    assert iter.next() == 1
-    assert iter.next() == 2
-    assert iter.next() is None
+    assert it.next() == 1
+    assert it.next() == 2
+    assert it.next() is None
 
 
 def test_skip() -> None:
     a = [1, 2, 3]
 
-    iter = Iter(a).skip(2)
+    it = Iter(a).skip(2)
 
-    assert iter.next() == 3
-    assert iter.next() is None
+    assert it.next() == 3
+    assert it.next() is None
 
 
 def test_reduce() -> None:
@@ -132,17 +139,17 @@ def test_any() -> None:
 def test_skip_while() -> None:
     a = [-1, 0, 1]
 
-    iter = Iter(a).skip_while(lambda x: x < 0)
+    it = Iter(a).skip_while(lambda x: x < 0)
 
-    assert iter.next() == 0
-    assert iter.next() == 1
-    assert iter.next() is None
+    assert it.next() == 0
+    assert it.next() == 1
+    assert it.next() is None
 
 
 def test_take_while() -> None:
     a = [-1, 0, 1]
 
-    iter = Iter(a).take_while(lambda x: x < 0)
+    it = Iter(a).take_while(lambda x: x < 0)
 
-    assert iter.next() == -1
-    assert iter.next() is None
+    assert it.next() == -1
+    assert it.next() is None
