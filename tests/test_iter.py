@@ -188,3 +188,16 @@ def test_positions() -> None:
 
     v: list = Iter(data).positions(lambda x: x % 2 == 1).collect(list)
     assert list(reversed(v)) == [7, 6, 3, 2, 0]
+
+
+def test_find_positions() -> None:
+    data = [1, 2, 3, 3, 4, 6, 7, 9]
+
+    def tuples(indexes):
+        return [(i, data[i]) for i in indexes]
+
+    it = Iter(data).find_positions(lambda x: x % 2 == 0)
+    assert list(it) == tuples([1, 4, 5])
+
+    v: list = Iter(data).find_positions(lambda x: x % 2 == 1).collect(list)
+    assert list(reversed(v)) == tuples([7, 6, 3, 2, 0])

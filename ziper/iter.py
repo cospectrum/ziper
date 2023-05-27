@@ -149,9 +149,8 @@ class Iter(Generic[T]):
                 return index, x
         return None
 
+    def find_positions(self, predicate: Fn[T, bool]) -> Iter[Tuple[int, T]]:
+        return self.enumerate().filter(lambda pair: predicate(pair[1]))
+
     def positions(self, predicate: Fn[T, bool]) -> Iter[int]:
-        return (
-            self.enumerate()
-            .filter(lambda pair: predicate(pair[1]))
-            .map(lambda pair: pair[0])
-        )
+        return self.find_positions(predicate).map(lambda pair: pair[0])

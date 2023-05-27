@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ziper"
-version = "0.1.4"
+version = "0.1.5"
 repository = "https://github.com/cospectrum/ziper"
 description = "Rust-like iterator for Python"
 license = "Apache-2.0"
