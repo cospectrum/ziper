@@ -179,3 +179,12 @@ def test_find_position() -> None:
     text = 'Ha'
     it = Iter(text).find_position(lambda ch: ch.islower())
     assert it == (1, 'a')
+
+
+def test_positions() -> None:
+    data = [1, 2, 3, 3, 4, 6, 7, 9]
+    it = Iter(data).positions(lambda x: x % 2 == 0)
+    assert list(it) == [1, 4, 5]
+
+    v: list = Iter(data).positions(lambda x: x % 2 == 1).collect(list)
+    assert list(reversed(v)) == [7, 6, 3, 2, 0]

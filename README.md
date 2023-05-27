@@ -5,14 +5,8 @@ Rust-like iterator for Python
 
 ## Install
 
-From PyPI:
 ```sh
 pip install ziper
-```
-
-From git:
-```sh
-pip install git+https://github.com/cospectrum/ziper.git
 ```
 
 ## Usage

@@ -148,3 +148,10 @@ class Iter(Generic[T]):
             if predicate(x):
                 return index, x
         return None
+
+    def positions(self, predicate: Fn[T, bool]) -> Iter[int]:
+        return (
+            self.enumerate()
+            .filter(lambda pair: predicate(pair[1]))
+            .map(lambda pair: pair[0])
+        )
