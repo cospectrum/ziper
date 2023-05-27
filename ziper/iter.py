@@ -142,3 +142,9 @@ class Iter(Generic[T]):
     def chunks(self, size: int) -> Iter[Iter[T]]:
         it = mitertools.ichunked(self, size)
         return Iter(it).map(lambda chunk: Iter(chunk))
+
+    def find_position(self, predicate: Fn[T, bool]) -> Optional[Tuple[int, T]]:
+        for index, x in self.enumerate():
+            if predicate(x):
+                return index, x
+        return None

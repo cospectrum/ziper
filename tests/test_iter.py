@@ -173,3 +173,9 @@ def test_chunks() -> None:
     assert chunks.next().collect(list) == [-2, 6, 0]  # type: ignore
     assert chunks.next().collect(list) == [3, 1]  # type: ignore
     assert chunks.next() is None
+
+
+def test_find_position() -> None:
+    text = 'Ha'
+    it = Iter(text).find_position(lambda ch: ch.islower())
+    assert it == (1, 'a')
