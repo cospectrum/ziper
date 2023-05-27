@@ -154,3 +154,6 @@ class Iter(Generic[T]):
 
     def positions(self, predicate: Fn[T, bool]) -> Iter[int]:
         return self.find_positions(predicate).map(lambda pair: pair[0])
+
+    def cartesian_product(self, other: Iterable[U]) -> Iter[Tuple[T, U]]:
+        return Iter(itertools.product(self, other))

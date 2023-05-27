@@ -201,3 +201,9 @@ def test_find_positions() -> None:
 
     v: list = Iter(data).find_positions(lambda x: x % 2 == 1).collect(list)
     assert list(reversed(v)) == tuples([7, 6, 3, 2, 0])
+
+
+def test_cartesian_product() -> None:
+    v: list = Iter(range(2)).cartesian_product('ab').collect(list)
+    assert isinstance(v[0], tuple)
+    assert v == [(0, 'a'), (0, 'b'), (1, 'a'), (1, 'b')]
