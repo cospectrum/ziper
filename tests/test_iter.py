@@ -222,3 +222,17 @@ def test_permutations() -> None:
 
     v = Iter([2, 2]).permutations(2).collect(list)
     assert v == [(2, 2), (2, 2)]
+
+
+def test_powerset() -> None:
+    v: list = Iter(range(1, 4)).powerset().collect(list)
+    assert v == [
+        (),
+        (1,),
+        (2,),
+        (3,),
+        (1, 2),
+        (1, 3),
+        (2, 3),
+        (1, 2, 3),
+    ]

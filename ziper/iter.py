@@ -160,3 +160,6 @@ class Iter(Generic[T]):
 
     def permutations(self, k: int) -> Iter[Tuple[T, ...]]:
         return Iter(itertools.permutations(self, k))
+
+    def powerset(self) -> Iter[Tuple[T, ...]]:
+        return Iter(mitertools.powerset(self))
