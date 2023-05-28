@@ -207,3 +207,18 @@ def test_cartesian_product() -> None:
     v: list = Iter(range(2)).cartesian_product('ab').collect(list)
     assert isinstance(v[0], tuple)
     assert v == [(0, 'a'), (0, 'b'), (1, 'a'), (1, 'b')]
+
+
+def test_permutations() -> None:
+    v: list = Iter(range(5, 8)).permutations(2).collect(list)
+    assert v == [
+        (5, 6),
+        (5, 7),
+        (6, 5),
+        (6, 7),
+        (7, 5),
+        (7, 6),
+    ]
+
+    v = Iter([2, 2]).permutations(2).collect(list)
+    assert v == [(2, 2), (2, 2)]

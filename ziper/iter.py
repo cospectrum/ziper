@@ -3,13 +3,13 @@ import itertools
 import more_itertools as mitertools
 
 from typing import (
+    Callable,
+    Generic,
     Iterable,
     Iterator,
-    Generic,
     Optional,
     TypeVar,
     Tuple,
-    Callable,
 )
 
 
@@ -157,3 +157,6 @@ class Iter(Generic[T]):
 
     def cartesian_product(self, other: Iterable[U]) -> Iter[Tuple[T, U]]:
         return Iter(itertools.product(self, other))
+
+    def permutations(self, k: int) -> Iter[Tuple[T, ...]]:
+        return Iter(itertools.permutations(self, k))
