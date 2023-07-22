@@ -13,9 +13,9 @@ from typing import (
 )
 
 
-T = TypeVar('T')
-U = TypeVar('U')
-V = TypeVar('V')
+T = TypeVar("T")
+U = TypeVar("U")
+V = TypeVar("V")
 
 Fn = Callable[[T], U]
 
@@ -132,7 +132,6 @@ class Iter(Generic[T]):
         return Iter(itertools.dropwhile(predicate, self))
 
     def inspect(self, f: Fn[T, None]) -> Iter[T]:
-
         def inspector(x: T) -> T:
             f(x)
             return x
@@ -163,3 +162,12 @@ class Iter(Generic[T]):
 
     def powerset(self) -> Iter[Tuple[T, ...]]:
         return Iter(mitertools.powerset(self))
+
+    def fuse(self) -> Iter[T]:
+        def it() -> Iterator[T]:
+            for x in self:
+                if x is None:
+                    break
+                yield x
+
+        return Iter(it())
