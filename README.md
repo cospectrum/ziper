@@ -21,7 +21,7 @@ ys = [6, 7, 8, 9]
 
 evens: list = (
     Iter(xs)
-    .filter(lambda x: x.isdecimal())
+    .filter(str.isdecimal)
     .map(int)
     .chain(ys)
     .filter(lambda x: x % 2 == 0)

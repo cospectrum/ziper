@@ -14,12 +14,12 @@ from typing import (
 def test_readme() -> None:
     from ziper import Iter
 
-    xs = ['1', '2', 'a', '3', '4', 'b', 'c']
+    xs = ["1", "2", "a", "3", "4", "b", "c"]
     ys = [6, 7, 8, 9]
 
     evens: list = (
         Iter(xs)
-        .filter(lambda x: x.isdecimal())
+        .filter(str.isdecimal)
         .map(int)
         .chain(ys)
         .filter(lambda x: x % 2 == 0)
@@ -29,7 +29,6 @@ def test_readme() -> None:
 
 
 def test_loop() -> None:
-
     def for_loop(it: Iterable[int]) -> List[int]:
         result = []
         for x in it:
@@ -61,9 +60,9 @@ def test_types() -> None:
     str_iter: Iter[str] = int_iter.map(f)
 
     first: Optional[str] = str_iter.next()
-    assert first == '1'
-    assert str_iter.next() == '2'
-    assert str_iter.next() == '3'
+    assert first == "1"
+    assert str_iter.next() == "2"
+    assert str_iter.next() == "3"
     assert str_iter.next() is None
 
 
@@ -121,11 +120,9 @@ def test_reduce() -> None:
 def test_fold() -> None:
     numbers = [1, 2, 3, 4, 5]
 
-    result = Iter(numbers).fold('0', lambda acc, x: (
-        f'({acc} + {x})'
-    ))
+    result = Iter(numbers).fold("0", lambda acc, x: (f"({acc} + {x})"))
 
-    assert result == '(((((0 + 1) + 2) + 3) + 4) + 5)'
+    assert result == "(((((0 + 1) + 2) + 3) + 4) + 5)"
 
 
 def test_all() -> None:
@@ -176,9 +173,9 @@ def test_chunks() -> None:
 
 
 def test_find_position() -> None:
-    text = 'Ha'
+    text = "Ha"
     it = Iter(text).find_position(lambda ch: ch.islower())
-    assert it == (1, 'a')
+    assert it == (1, "a")
 
 
 def test_positions() -> None:
@@ -204,9 +201,9 @@ def test_find_positions() -> None:
 
 
 def test_cartesian_product() -> None:
-    v: list = Iter(range(2)).cartesian_product('ab').collect(list)
+    v: list = Iter(range(2)).cartesian_product("ab").collect(list)
     assert isinstance(v[0], tuple)
-    assert v == [(0, 'a'), (0, 'b'), (1, 'a'), (1, 'b')]
+    assert v == [(0, "a"), (0, "b"), (1, "a"), (1, "b")]
 
 
 def test_permutations() -> None:
