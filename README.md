@@ -1,7 +1,9 @@
 # ziper
+[![github]](https://github.com/cospectrum/ziper)
+
+[github]: https://img.shields.io/badge/github-cospectrum/ziper-8da0cb?logo=github
 
 Rust-like iterator for Python
-
 
 ## Install
 
