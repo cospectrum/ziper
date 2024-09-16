@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ziper"
-version = "0.1.5"
+version = "0.2.0"
 repository = "https://github.com/cospectrum/ziper"
 description = "Rust-like iterator for Python"
 license = "Apache-2.0"
@@ -8,7 +8,7 @@ authors = ["cospectrum <severinalexeyv@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 more-itertools = "^9"
 
 [tool.poetry.group.dev.dependencies]
@@ -19,7 +19,7 @@ pyright = "^1.1.309"
 
 [tool.mypy]
 ignore_missing_imports = true
-python_version = "3.6"
+python_version = "3.7"
 
 [build-system]
 requires = ["poetry-core"]
